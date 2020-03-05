@@ -1,3 +1,10 @@
+# 调试
+
+* 本地部署mysql服务，新建一个mysql数据库`spiders`
+	- MySQL部署及相关笔记[DB_MySQL.mds](https://github.com/xiaodongQ/devNoteBackup/blob/master/%E5%90%84%E8%AF%AD%E8%A8%80%E8%AE%B0%E5%BD%95/DB_MySQL.md)
+* 修改model.go文件中，数据库相关的参数
+
+
 # 爬取豆瓣电影 Top250
 
 爬虫是标配了，第一个就从最最最简单的爬虫开始写起吧

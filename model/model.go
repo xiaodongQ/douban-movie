@@ -12,16 +12,18 @@ var (
 	DB *gorm.DB
 
 	username string = "root"
-	password string = "rootroot"
+	password string = "xd_123456"
 	dbName   string = "spiders"
 )
 
 func init() {
 	var err error
-	DB, err = gorm.Open("mysql", fmt.Sprintf("%s:%s@/%s?charset=utf8&parseTime=True&loc=Local", username, password, dbName))
+	url := fmt.Sprintf("%s:%s@/%s?charset=utf8&parseTime=True&loc=Local", username, password, dbName)
+	DB, err = gorm.Open("mysql", url)
 	if err != nil {
 		log.Fatalf(" gorm.Open.err: %v", err)
 	}
+	log.Printf("open db ok[%s]\n", url)
 
 	DB.SingularTable(true)
 	gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
