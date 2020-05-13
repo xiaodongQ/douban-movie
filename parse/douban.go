@@ -56,7 +56,6 @@ func ParsePages(doc *goquery.Document) (pages []Page) {
 // 分析电影数据
 func ParseMovies(doc *goquery.Document) (movies []DoubanMovie) {
 	doc.Find("#content > div > div.article > ol > li").Each(func(i int, s *goquery.Selection) {
-		log.Println("============")
 		title := s.Find(".hd a span").Eq(0).Text()
 
 		subtitle := s.Find(".hd a span").Eq(1).Text()
@@ -94,8 +93,6 @@ func ParseMovies(doc *goquery.Document) (movies []DoubanMovie) {
 			Comment:  comment,
 			Quote:    quote,
 		}
-
-		log.Printf("i: %d, movie: %v", i, movie)
 
 		movies = append(movies, movie)
 	})

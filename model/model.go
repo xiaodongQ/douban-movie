@@ -29,4 +29,8 @@ func init() {
 	gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
 		return "sp_" + defaultTableName
 	}
+
+	tbname := "sp_douban_movie"
+	log.Printf("has table %s [%t]\n", tbname, DB.HasTable(tbname))
+
 }

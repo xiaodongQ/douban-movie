@@ -21,7 +21,6 @@ func Add(movies []parse.DoubanMovie) {
 		if err := model.DB.Create(&movie).Error; err != nil {
 			log.Printf("db.Create index: %d, err : %v", index, err)
 		}
-		log.Printf("db.Create index: %d ok", index)
 	}
 }
 
@@ -30,14 +29,11 @@ func Start() {
 	var movies []parse.DoubanMovie
 
 	pages := parse.GetPages(BaseUrl)
-	i := 0
 	for _, page := range pages {
 		doc, err := goquery.NewDocument(strings.Join([]string{BaseUrl, page.Url}, ""))
 		if err != nil {
 			log.Println(err)
 		}
-		log.Printf("index:%d, get doc:%v", i, doc)
-		i++
 
 		movies = append(movies, parse.ParseMovies(doc)...)
 	}
@@ -47,7 +43,17 @@ func Start() {
 }
 
 func main() {
+	// 测试，手动插入一条记录后查询
+	// insert into spiders.sp_douban_movie(title,subtitle) value('111','222');
+	record := parse.DoubanMovie{}
+	model.DB.First(&record)
+	log.Printf("record:%v", record)
+
 	Start()
 
 	defer model.DB.Close()
+}
+
+func init() {
+	log.SetFlags(log.Lshortfile)
 }
